@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <button id="allRates">See All</button>
+    <ul id="output"></ul>
+    <script>
+        const url = 'http://localhost:3000/rates'
+        var btn = document.querySelector('#allRates');
+        var ul = document.getElementById('output');
+        btn.addEventListener('click', getAllRates);
+
+        function getAllRates() {
+            fetch(url).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+          displayData(data.data);     
+        })
+        }
+        
+        function displayData(data){
+             data.forEach(function(item,i){
+                    var price=(Math.round(item.quote.USD.price*100)/100);
+                    var li=document.createElement('li');
+                    var span=document.createElement('span');
+                    span.innerHTML=`${item.name} ${price}`;
+                    li.appendChild(span);
+                    ul.appendChild(li);
+                    console.log(item.name,item.quote.USD.price);
+                })
+            }
+        
+
+    </script>
+</body>
+
+
+</html>
