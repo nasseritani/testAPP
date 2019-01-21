@@ -7,7 +7,7 @@
                 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
+        <script src="qrcode.min.js" type="application/javascript"></script>
         <!------ Include the above in your HEAD tag ---------->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
         crossorigin="anonymous">        
@@ -94,8 +94,8 @@
                             <div class="box"></div>
                             <h5><img width="40" height="40" src="http://www.kuwaitgate.org/canon/004/images/nmas.jpg" id="sayerLogo">إحدى شركات مجموعة الساير</h5>
                             <h5>Member of Al-Sayer Group Companies</h5>
-                            <div class="qr-code">
-                                <img src="https://www.shopify.com/growth-tools-assets/qr-code/shopify-faae7065b7b351d28495b345ed76096c03de28bac346deb1e85db632862fd0e4.png" >
+                            <div id="qrcode">
+                              
                             </div>
                             <hr>
                             <div class="card-footer">
@@ -108,6 +108,8 @@
                     </div>
                 </div>
 </div>
+
+        </div>
     </body>
     <script>
             var emp={};
@@ -115,13 +117,16 @@
             var profilePhoto = document.getElementById('profilePhoto');
             var names=document.getElementById('name');
             btn.addEventListener('click', getEmployee);
-            
+            var qrcode = new QRCode("qrcode");
+        
     function getEmployee(e){
         e.preventDefault();
         empNumber=document.getElementById('empNumber').value;
         if(empNumber==""){
             $("#myModal").modal();
         }
+            qrcode.makeCode(empNumber);
+
         var urls = "http://localhost:3000/Employee/"+empNumber;
         var photoUrl="http://localhost:3000/Employee/"+empNumber+"/1";
         var apiRequest1=fetch(urls).then(function(response) {

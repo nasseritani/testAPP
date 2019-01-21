@@ -94,7 +94,7 @@ margin: 5px 0;
 }
 
 /* For QR CODE IMAGE*/
-.qr-code img {
+#qrcode img {
 width: 30px;
 }
 
