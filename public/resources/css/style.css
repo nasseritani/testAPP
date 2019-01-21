@@ -1,0 +1,137 @@
+body{
+background-attachment: scroll;
+    background-color: #999;
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-image: url('https://salesdemo.successfactors.eu/ui/topnav/img/light_back_stripes_9d6f50b49bde682eb0180f95588d1d89.png');
+    background-size: auto;
+}
+.search{
+    margin-top: 5%;
+}
+
+/* For the search form */
+.form-control-borderless {
+border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+border: none;
+outline: none;
+box-shadow: none;
+}
+.sfLogo img{
+    position: absolute;
+    left: 80%;
+    top: 10%;
+}
+
+
+.modal-header{
+        align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+    display: block;s
+}
+
+/* For the Card Holder display*/
+
+.id-card-holder {
+width: 400px;
+padding: 4px;
+margin: 0 auto;
+background-color: #1f1f1f;
+border-radius: 5px;
+position: relative;
+margin-top: 60px;
+
+}
+.id-card-holder:after {
+content: '';
+width: 7px;
+display: block;
+background-color: #0a0a0a;
+height: 100px;
+position: absolute;
+top: 105px;
+border-radius: 0 5px 5px 0;
+
+}
+
+.id-card {
+font-weight: 700;
+font-size: 20px;
+font-family: serif;
+background-color: #fff;
+padding: 10px;
+border-radius: 10px;
+text-align: center;
+box-shadow: 0 0 1.5px 0px #b9b9b9;
+}
+.id-card img {
+margin: 0 auto;
+}
+.header{
+text-align: left;
+}
+.header img {
+width: 250px;
+margin-top: 15px;
+}
+.photo img {
+width: 115px;
+margin-top: 15px;
+}
+h2 {
+font-size: 18px;
+font-weight: 700;
+font-family: serif;
+margin: 5px 0;
+}
+
+/* For QR CODE IMAGE*/
+.qr-code img {
+width: 30px;
+}
+
+/* For the company text*/
+h5{
+color:#ed0953ed;
+font-size: 20px;
+font-weight: 700;
+font-family: sans-serif;
+}
+/* HIDE AND SHOW CARD*/
+.hide{
+opacity: 0;
+}
+.show{opacity: 1;
+}
+
+/*BACKGROUNG IMAGE */
+.background{
+left: 18%;
+top: 41%;
+height: 110px;
+width: 250px;
+opacity: 0.3;
+background-image: url("http://www.alsayerholding.com/dam/jcr:c284d3b1-d897-4ae2-90ad-7a4867f97cb4/logo-red.svg");
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+position: absolute;
+}
+#jobTitle{
+margin-bottom: 15px;
+}
+
+/* For Input Yellow Color Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+-webkit-box-shadow: 0 0 0px 1000px white inset;
+}

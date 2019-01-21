@@ -1,43 +1,163 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Employee Access Card</title>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+        <!------ Include the above in your HEAD tag ---------->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">        
+        <!--Custom CSS --->
+        <link rel="stylesheet" type="text/css"  href="../resources/css/style.css" />
+        <link rel="stylesheet" type="text/css" media="print" href="./resources/css/print.css" />
+    </head>
+    
+    <body>
+        <div class="sfLogo">
+        <img src="https://salesdemo.successfactors.eu/ui/uicore/img/logo_7a5a3299cc5f1e01f0aeb737d5369c67.png">
+        </div>
+        <div class="container">
 
-<body>
-    <button id="allRates">See All</button>
-    <ul id="output"></ul>
+            <div class="row justify-content-center search printButtonClass">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <form class="card card-sm">
+                        <div class="card-body row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <i class="fas fa-search h4 text-body"></i>
+                            </div>
+                            <!--end of col-->
+                            <div class="col">
+                                <input class="form-control form-control-lg form-control-borderless " type="search" placeholder="Enter Employee Number" id="empNumber">
+                            </div>
+                            <!--end of col-->
+                            <div class="col-auto">
+                                <button class="btn btn-lg btn-primary" type="submit" id="searchEmployee">Search</button>
+                            </div>
+                            <!--end of col-->
+                        </div>
+                    </form>
+                </div>
+                <!--end of col-->
+            </div>
+            <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Alert</h4>
+        </div>
+        <div class="modal-body">
+          <p>Please enter Employee Number</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+            <div class="row justify-content-center hide" id="card">
+                <div class="col-12 col-md-10 col-lg-8">
+                     
+                    <div class="id-card-holder">
+                    
+                        <div class="id-card">
+                            <div class="background"></div>
+                       <div class="card-info">
+                            <div class="header">
+                                <img src="http://pluspng.com/img-png/lexus-auto-logo-vector-png-lexus-logo-eps-pdf-1968.jpg">
+                            </div>
+                            <div class="photo" id="profilePhoto">
+                                <img id="imgProfile">
+                            </div>
+                            <div id="empID">
+                               <span class="empID"></span> 
+                            </div>
+                            <br/>
+                            <div id="name">
+                                <span class="arabicName"></span>
+                                <br/>
+                                <span class="englishName"></span>
+                            </div>
+                            <br/>
+                            <div id="jobTitle">
+                                <span class="jobTitleArabic"></span>
+                                <br/>
+                                <span class="jobTitleEnglish"></span>
+                            </div>
+                            <div class="box"></div>
+                            <h5><img width="40" height="40" src="http://www.kuwaitgate.org/canon/004/images/nmas.jpg" id="sayerLogo">إحدى شركات مجموعة الساير</h5>
+                            <h5>Member of Al-Sayer Group Companies</h5>
+                            <div class="qr-code">
+                                <img src="https://www.shopify.com/growth-tools-assets/qr-code/shopify-faae7065b7b351d28495b345ed76096c03de28bac346deb1e85db632862fd0e4.png" >
+                            </div>
+                            <hr>
+                            <div class="card-footer">
+                             <h2> في حال تم العثور على هذه الهوية يرجى ارسالها إلى  العنوان التالي  ص-ب 485 الصفاة 13005 الكويت، أو الاتصال على هاتف رقم 1803803 إدارة الموارد البشرية </h2>                               
+                               <h2>In the event this ID is found,please mail to P.O. Box 485 Safat,13005 Kuwait or call 1803803 HRD Division.         <img width="25px" src="https://www.shopify.com/growth-tools-assets/qr-code/shopify-faae7065b7b351d28495b345ed76096c03de28bac346deb1e85db632862fd0e4.png" >                                </h2> 
+
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+    </body>
     <script>
-        const url = 'http://localhost:3000/rates'
-        var btn = document.querySelector('#allRates');
-        var ul = document.getElementById('output');
-        btn.addEventListener('click', getAllRates);
-
-        function getAllRates() {
-            fetch(url).then(function(response) {
-                return response.json();
-            }).then(function(data) {
-          displayData(data.data);     
-        })
+            var emp={};
+            var btn = document.querySelector('#searchEmployee');
+            var profilePhoto = document.getElementById('profilePhoto');
+            var names=document.getElementById('name');
+            btn.addEventListener('click', getEmployee);
+            
+    function getEmployee(e){
+        e.preventDefault();
+        empNumber=document.getElementById('empNumber').value;
+        if(empNumber==""){
+            $("#myModal").modal();
         }
-        
-        function displayData(data){
-             data.forEach(function(item,i){
-                    var price=(Math.round(item.quote.USD.price*100)/100);
-                    var li=document.createElement('li');
-                    var span=document.createElement('span');
-                    span.innerHTML=`${item.name} ${price}`;
-                    li.appendChild(span);
-                    ul.appendChild(li);
-                    console.log(item.name,item.quote.USD.price);
-                })
-            }
-        
-
+        var urls = "http://localhost:3000/Employee/"+empNumber;
+        var photoUrl="http://localhost:3000/Employee/"+empNumber+"/1";
+        var apiRequest1=fetch(urls).then(function(response) {
+                    return response.json();
+                });
+        var apiRequest2 = fetch(photoUrl).then(function(response){
+        return response.json();
+});
+var combinedData = {"apiRequest1":{},"apiRequest2":{}};
+Promise.all([apiRequest1,apiRequest2]).then(function(values){
+    combinedData["apiRequest1"] = values[0];
+    combinedData["apiRequest2"] = values[1];
+    console.log(combinedData);
+    displayData(combinedData);
+    return combinedData;
+});
+}              
+          function displayData(data){
+                var card=document.getElementById("card");
+                card.classList.add("show");
+                emp.userID=data.apiRequest1.d.userId;
+                emp.engName=data.apiRequest1.d.defaultFullName;
+                emp.arbName=data.apiRequest1.d.addressLine1;
+                emp.positionTitleEng=data.apiRequest1.d.jobTitle;
+                emp.positionTitleAr=data.apiRequest1.d.city;
+                emp.photo=data.apiRequest2.d.photo;
+                
+                var imgProfile=document.getElementById("imgProfile");
+                imgProfile.src="data:image/png;base64,"+emp.photo;
+                profilePhoto.append(imgProfile);
+                $("span.empID").first().text(emp.userID);
+                $("span.arabicName").first().text(emp.engName);
+                $("span.englishName").first().text(emp.arbName);    
+                $("span.jobTitleArabic").first().text(emp.positionTitleAr);
+                $("span.jobTitleEnglish").first().text(emp.positionTitleEng);
+                }
     </script>
-</body>
-
 
 </html>
